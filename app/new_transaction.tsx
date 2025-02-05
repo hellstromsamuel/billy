@@ -1,7 +1,6 @@
-import { ThemedText } from "@/components/ThemedText";
-import { MoneyCollectFilled } from "@ant-design/icons";
+import { ThemedText } from "@/components/ui/ThemedText";
+import ThemedContainer from "@/components/ui/ThemedContainer";
 import { useRouter } from "expo-router";
-import { ReactElement } from "react";
 import {
   Button,
   SafeAreaView,
@@ -22,7 +21,7 @@ export default function NewTransactionScreen() {
   }[] = [
     {
       label: "Bøter",
-      description: "Legg til nye bøter",
+      description: "Gi nye bøter",
       route: "/new_transaction/fine",
       emoji: "🤑",
       isDisabled: true,
@@ -44,8 +43,8 @@ export default function NewTransactionScreen() {
   ];
 
   return (
-    <SafeAreaView className="h-full bg-white">
-      <View className="absolute right-4 top-4">
+    <SafeAreaView>
+      <View style={{ position: "absolute", top: 8, right: 8 }}>
         <Button
           title="Tilbake"
           color={"purple"}
@@ -53,32 +52,55 @@ export default function NewTransactionScreen() {
         />
       </View>
 
-      <View className="mt-16 px-4">
-        <View className="gap-2">
+      <View style={{ paddingHorizontal: 12, paddingTop: 48 }}>
+        <View style={{ gap: 8 }}>
           <ThemedText type="title">Legg til</ThemedText>
-          <Text className="text-xl">Hva vil du registere til Billy?</Text>
+          <ThemedText>Hva vil du registere til Billy?</ThemedText>
         </View>
 
-        <View className="mt-8 gap-4">
+        <View style={{ gap: 16, marginTop: 32 }}>
           {transactionOptions.map((option) => (
             <TouchableOpacity
               key={option.label}
-              className="border border-gray-200 rounded-2xl h-20 p-4 flex flex-row gap-4 items-center justify-between"
               style={{ opacity: option.isDisabled ? 0.5 : 1 }}
               disabled={option.isDisabled}
             >
-              <View className="gap-1">
-                <View className="flex flex-row gap-2 items-center">
-                  <ThemedText type="subtitle">{option.label}</ThemedText>
-                  {option.isDisabled && (
-                    <Text className="text-xs font-bold bg-red-100 w-auto color-red-500 py-0.5 px-1 rounded">
-                      Ikke tilgjengelig
-                    </Text>
-                  )}
+              <ThemedContainer
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <View style={{ gap: 4 }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <ThemedText style={{ fontWeight: "bold" }}>
+                      {option.label}
+                    </ThemedText>
+                    {option.isDisabled && (
+                      <Text
+                        style={{
+                          fontSize: 10,
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          color: "red",
+                        }}
+                      >
+                        Kun admin
+                      </Text>
+                    )}
+                  </View>
+                  <ThemedText>{option.description}</ThemedText>
                 </View>
-                <Text>{option.description}</Text>
-              </View>
-              <Text className="text-4xl">{option.emoji}</Text>
+
+                <ThemedText style={{ fontSize: 24 }}>{option.emoji}</ThemedText>
+              </ThemedContainer>
             </TouchableOpacity>
           ))}
         </View>

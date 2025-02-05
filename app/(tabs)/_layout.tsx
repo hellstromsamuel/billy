@@ -1,19 +1,14 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { House, NotepadText, Settings2, Users } from "lucide-react-native";
-
+import { Bell, House, Settings2, Users } from "lucide-react-native";
+import useColors from "@/hooks/useColors";
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { colors } = useColors();
 
   return (
     <Tabs
       screenOptions={{
-        sceneStyle: {
-          backgroundColor: Colors[colorScheme ?? "light"].background,
-        },
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: colors.tint,
         tabBarStyle: {
           paddingLeft: 8,
           paddingRight: 8,
@@ -21,7 +16,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           headerShown: false,
           title: "Hjem",
@@ -43,11 +38,11 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="fines"
+        name="notifications"
         options={{
           headerShown: false,
-          title: "Bøter",
-          tabBarIcon: ({ color }) => <NotepadText size={28} color={color} />,
+          title: "Siste",
+          tabBarIcon: ({ color }) => <Bell size={28} color={color} />,
           tabBarItemStyle: {
             marginLeft: 32, // Space for CTA button
           },

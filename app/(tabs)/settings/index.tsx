@@ -1,83 +1,60 @@
-import { ThemedText } from "@/components/ThemedText";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
-import WhiteContainer from "@/components/ui/WhiteContainer";
-import { cn } from "@/utils/cn";
-import { ReactElement, useState } from "react";
+import { View } from "react-native";
+import Button from "@/components/ui/Button";
+import { ThemedText } from "@/components/ui/ThemedText";
+import ScreenLayout from "@/components/ui/layout/ScreenLayout";
+import ThemeRadioButton from "@/components/theme/ThemeRadioButton";
+import { ReactElement } from "react";
+import SettingsSectionItems from "@/components/settings/SettingsSectionItems";
 
-type SettingsItem = {
-  label: string;
-  view: ReactElement;
-};
+type TSettingsSection = { title: string; items: ReactElement[] };
 
 export default function SettingsScreen() {
-  const [color, setColor] = useState("purple");
-
-  const teamSettings: SettingsItem[] = [
+  const sections: TSettingsSection[] = [
     {
-      label: "Navn",
-      view: (
-        <View>
-          <Text className="font-bold">Lag 1</Text>
-        </View>
-      ),
+      title: "Tema",
+      items: [
+        <ThemeRadioButton type="light" />,
+        <ThemeRadioButton type="dark" />,
+      ],
     },
-    {
-      label: "Logo",
-      view: (
-        <View>
-          <Text className="font-bold">Logo</Text>
-        </View>
-      ),
-    },
-    {
-      label: "Fargetema",
-      view: (
-        <View>
-          <Text
-            className={cn(
-              `font-bold p-1 rounded text-${color}-500 bg-${color}-200`
-            )}
-          >
-            {color}
-          </Text>
-        </View>
-      ),
-    },
-  ];
-
-  const sections: { title: string; items: SettingsItem[] }[] = [
     {
       title: "Lag",
-      items: teamSettings,
+      items: [
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <ThemedText>Navn</ThemedText>
+          <Button variant="text">Lag 1</Button>
+        </View>,
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <ThemedText>Lag</ThemedText>
+          <Button variant="text">Logo</Button>
+        </View>,
+      ],
     },
   ];
 
   return (
-    <SafeAreaView className="h-full bg-purple-200">
-      <ScrollView className="px-4 pt-8">
-        {sections.map((section) => (
-          <View key={section.title}>
-            <ThemedText type="subtitle" className="mb-2">
-              {section.title}
-            </ThemedText>
-            <WhiteContainer className="flex-col">
-              {section.items.map((item, index) => (
-                <View
-                  className={cn(
-                    "w-full py-2 px-2 flex flex-row items-center justify-between",
-                    index !== section.items.length - 1 &&
-                      " border-b border-gray-200"
-                  )}
-                  key={item.label}
-                >
-                  <Text>{item.label}</Text>
-                  {item.view}
-                </View>
-              ))}
-            </WhiteContainer>
-          </View>
-        ))}
-      </ScrollView>
-    </SafeAreaView>
+    <ScreenLayout>
+      {sections.map((section) => (
+        <View key={section.title}>
+          <ThemedText type="subtitle" style={{ marginBottom: 12 }}>
+            {section.title}
+          </ThemedText>
+
+          <SettingsSectionItems items={section.items} />
+        </View>
+      ))}
+    </ScreenLayout>
   );
 }

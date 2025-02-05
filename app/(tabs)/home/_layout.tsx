@@ -1,13 +1,13 @@
 import { Stack } from "expo-router";
 
-export default function SettingsLayout() {
+export default function HomeLayout() {
   return (
     <Stack>
       <Stack.Screen
         name="index"
         options={{
-          title: "Innstillinger",
-          headerTitle: "Innstillinger",
+          title: "Hjem",
+          headerTitle: "Hei, Samuel!",
           headerShown: true,
           headerLargeTitle: true,
         }}

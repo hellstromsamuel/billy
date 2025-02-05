@@ -1,13 +1,13 @@
 import { Stack } from "expo-router";
 
-export default function TeamLayout() {
+export default function NotificationsLayout() {
   return (
     <Stack>
       <Stack.Screen
         name="index"
         options={{
-          title: "Team",
-          headerTitle: "Team",
+          title: "Siste",
+          headerTitle: "Siste",
           headerShown: true,
           headerLargeTitle: true,
           headerSearchBarOptions: {
