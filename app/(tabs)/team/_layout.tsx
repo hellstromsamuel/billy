@@ -10,11 +10,6 @@ export default function TeamLayout() {
           headerTitle: "Team",
           headerShown: true,
           headerLargeTitle: true,
-          headerSearchBarOptions: {
-            placeholder: "Søk",
-            cancelButtonText: "Avbryt",
-            tintColor: "purple",
-          },
         }}
       />
     </Stack>
