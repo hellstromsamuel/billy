@@ -2,7 +2,6 @@ import ScreenLayout from "@/components/ui/layout/ScreenLayout";
 import { useNavigation } from "expo-router";
 import React from "react";
 import { Text } from "react-native";
-import useColors from "../../../hooks/useColors";
 
 export default function TeamScreen() {
   const navigation = useNavigation();
